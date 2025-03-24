@@ -1,3 +1,3 @@
-# Multi-modal Knowledge Distillation-based Human Trajectory Forecasting
+# KDTP
 
-The code will be uploaded shortly.
+The code for "Multi-modal Knowledge Distillation-based Human Trajectory Forecasting, CVPR 2025" will be uploaded shortly.
