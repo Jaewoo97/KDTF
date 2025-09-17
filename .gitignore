@@ -20,3 +20,5 @@ HiVT/models_original
 romp/files/
 HiVT/___models_copy
 HiVT/___scripts_copy
+# ignore all ROMP blobs
+romp/files/
