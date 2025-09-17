@@ -17,3 +17,6 @@ preprocessing_script/preprocess_2nd.py
 preprocessing_script/preprocess_2nd_v3.py
 preprocessing_script/*.sh
 HiVT/models_original
+romp/files
+HiVT/___models_copy
+HiVT/___scripts_copy
