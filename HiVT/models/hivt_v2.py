@@ -1,3 +1,6 @@
+'''
+v2: inst 에 대해서도 loss
+'''
 import pytorch_lightning as pl
 import torch
 import torch.nn as nn
@@ -132,6 +135,29 @@ class HiVT(pl.LightningModule):
                                 emb_numHead=emb_numHead,
                                 emb_dropout=emb_dropout,
                                 emb_numLayers=emb_numLayers)
+        elif encoder_type == 'traj_pose_woRotation':
+            self.local_encoder = LocalEncoder_wPose_withoutRotation(historical_steps=historical_steps,
+                                node_dim=node_dim,
+                                edge_dim=edge_dim,
+                                embed_dim=embed_dim,
+                                num_heads=num_heads,
+                                dropout=dropout,
+                                num_temporal_layers=num_temporal_layers,
+                                local_radius=local_radius,
+                                parallel=parallel,
+                                emb_numHead=emb_numHead,
+                                emb_dropout=emb_dropout,
+                                emb_numLayers=emb_numLayers)
+        elif encoder_type == 'traj_pose_8steps':
+            self.local_encoder = LocalEncoder_wPose_8steps(historical_steps=historical_steps,
+                                node_dim=node_dim,
+                                edge_dim=edge_dim,
+                                embed_dim=embed_dim,
+                                num_heads=num_heads,
+                                dropout=dropout,
+                                num_temporal_layers=num_temporal_layers,
+                                local_radius=local_radius,
+                                parallel=parallel)
         elif encoder_type == 'traj_pose_text':
             self.local_encoder = LocalEncoder_wPoseText(historical_steps=historical_steps,
                                 node_dim=node_dim,

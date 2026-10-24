@@ -1,6 +1,5 @@
 import numpy as np
 import os, sys
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 # sys.path.append('/mnt/jaewoo4tb/textraj')
 import torch
 from tqdm import tqdm

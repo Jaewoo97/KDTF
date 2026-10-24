@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 import os, sys
 import os.path as osp
+sys.path.insert(0, osp.dirname(osp.dirname(osp.abspath(__file__))))  # repo root
+from kdtf_paths import ROMP_DIR
 import torch
 from torch import nn
 import argparse
@@ -33,9 +35,9 @@ def romp_settings(input_args=sys.argv[1:]):
     parser.add_argument('--show_items', type=str, default='mesh', help = 'The items to visualized, including mesh,pj2d,j3d,mesh_bird_view,mesh_side_view,center_conf. splited with ,')
     parser.add_argument('--save_video', action='store_true', help = 'Whether to save the video results')
     parser.add_argument('--frame_rate', type=int, default=24, help = 'The frame_rate of saved video results')
-    parser.add_argument('--smpl_path', type=str, default=osp.join('/mnt/jaewoo4tb/textraj/romp/files/.romp','SMPL_NEUTRAL.pth'), help = 'The path of smpl model file')
-    parser.add_argument('--model_path', type=str, default=osp.join('/mnt/jaewoo4tb/textraj/romp/files/.romp','ROMP.pkl'), help = 'The path of ROMP checkpoint')
-    parser.add_argument('--model_onnx_path', type=str, default=osp.join('/mnt/jaewoo4tb/textraj/romp/files/.romp','ROMP.onnx'), help = 'The path of ROMP onnx checkpoint')
+    parser.add_argument('--smpl_path', type=str, default=osp.join(ROMP_DIR,'SMPL_NEUTRAL.pth'), help = 'The path of smpl model file')
+    parser.add_argument('--model_path', type=str, default=osp.join(ROMP_DIR,'ROMP.pkl'), help = 'The path of ROMP checkpoint')
+    parser.add_argument('--model_onnx_path', type=str, default=osp.join(ROMP_DIR,'ROMP.onnx'), help = 'The path of ROMP onnx checkpoint')
     parser.add_argument('--root_align',type=bool, default=False, help = 'Please set this config as True to use the ROMP checkpoints trained by yourself.')
     parser.add_argument('--webcam_id',type=int, default=0, help = 'The Webcam ID.')
     args = parser.parse_args(input_args)

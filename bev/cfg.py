@@ -4,6 +4,7 @@ import os.path as osp
 import os
 import torch
 from romp.utils import download_model
+from kdtf_paths import ROMP_DIR
 
 model_dict = {
     1: 'BEV_ft_agora.pth',
@@ -19,7 +20,7 @@ def bev_settings(input_args=sys.argv[1:]):
     parser.add_argument('-m', '--mode', type=str, default='image', help = 'Inferece mode, including image, video, webcam')
     parser.add_argument('--model_id', type=int, default=2, help = 'Whether to process the input as a long image, sliding window way')
     parser.add_argument('-i', '--input', type=str, default='/ssd4tb/jaewoo/t2p/jrdb/train_dataset/images/image_0/jordan-hall-2019-04-22_0/000092.jpg', help = 'Path to the input image / video')
-    parser.add_argument('-o', '--save_path', type=str, default=osp.join('/mnt/jaewoo4tb/textraj/romp/files/','BEV_results'), help = 'Path to save the results')
+    parser.add_argument('-o', '--save_path', type=str, default=osp.join(osp.dirname(ROMP_DIR),'BEV_results'), help = 'Path to save the results')
     parser.add_argument('--crowd', action='store_false', help = 'Whether to process the input as a long image, sliding window way')
     parser.add_argument('--GPU', type=int, default=0, help = 'The gpu device number to run the inference on. If GPU=-1, then running in cpu mode')
 
@@ -36,9 +37,9 @@ def bev_settings(input_args=sys.argv[1:]):
     parser.add_argument('--show_items', type=str, default='mesh,mesh_bird_view,pj2d', help = 'The items to visualized, including mesh,pj2d,j3d,mesh_bird_view,mesh_side_view,center_conf,rotate_mesh. splited with ,')
     parser.add_argument('--save_video', action='store_true', help = 'Whether to save the video results')
     parser.add_argument('--frame_rate', type=int, default=24, help = 'The frame_rate of saved video results')
-    parser.add_argument('--smpl_path', type=str, default=osp.join('/mnt/jaewoo4tb/textraj/romp/files/.romp','SMPLA_NEUTRAL.pth'), help = 'The path of SMPL-A model file')
-    parser.add_argument('--smil_path', type=str, default=osp.join('/mnt/jaewoo4tb/textraj/romp/files/.romp','smil_packed_info.pth'), help = 'The path of SMIL model file')
-    parser.add_argument('--model_path', type=str, default=osp.join('/mnt/jaewoo4tb/textraj/romp/files/.romp',model_dict[model_id]), help = 'The path of BEV checkpoint')
+    parser.add_argument('--smpl_path', type=str, default=osp.join(ROMP_DIR,'SMPLA_NEUTRAL.pth'), help = 'The path of SMPL-A model file')
+    parser.add_argument('--smil_path', type=str, default=osp.join(ROMP_DIR,'smil_packed_info.pth'), help = 'The path of SMIL model file')
+    parser.add_argument('--model_path', type=str, default=osp.join(ROMP_DIR,model_dict[model_id]), help = 'The path of BEV checkpoint')
 
     # not support temporal processing now
     parser.add_argument('-t', '--temporal_optimize', action='store_true', help = 'Whether to use OneEuro filter to smooth the results')
@@ -54,7 +55,7 @@ def bev_settings(input_args=sys.argv[1:]):
     args = parser.parse_args(input_args)
     
     if args.model_id != 2:
-        args.model_path = osp.join('/mnt/jaewoo4tb/textraj/romp/files/','.romp',model_dict[args.model_id])
+        args.model_path = osp.join(ROMP_DIR,model_dict[args.model_id])
         args.center_thresh = conf_dict[args.model_id][0]
         args.nms_thresh = conf_dict[args.model_id][1]
         args.relative_scale_thresh = conf_dict[model_id][2]

@@ -9,7 +9,9 @@ from PIL import Image
 from io import BytesIO
 import sys
 import tqdm
-sys.path.append('/mnt/jaewoo4tb/textraj')
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repo root
+from kdtf_paths import TMP_DIR, PLLAVA_DIR
 import pandas as pd
 import csv
 from bev.model import BEV
@@ -147,17 +149,17 @@ class Socials:
 class Caption3DPoseEngine:
     def __init__(self, conv_mode, num_frames):
         self.HORIZONTAL_MARGIN = 100
-        self.CROP_IMG_DIR = "/mnt/jaewoo4tb/textraj/temp/crop_imgs"
+        self.CROP_IMG_DIR = os.path.join(TMP_DIR, 'crop_imgs')
         self.caption_count = 0
         self.agents = None
         
         # Load video captioning model (pllava)
-        self.vid_model, self.vid_processor = load_pllava('/mnt/jaewoo4tb/nayoung_ws/zeropose/VFRL/PLLaVA/MODELS/pllava-13b', num_frames=num_frames, use_lora=True, weight_dir='/mnt/jaewoo4tb/nayoung_ws/zeropose/VFRL/PLLaVA/MODELS/pllava-13b', lora_alpha=4, pooling_shape=(num_frames, 12, 12))
+        self.vid_model, self.vid_processor = load_pllava(PLLAVA_DIR, num_frames=num_frames, use_lora=True, weight_dir=PLLAVA_DIR, lora_alpha=4, pooling_shape=(num_frames, 12, 12))
         self.vid_model = self.vid_model.to('cuda:0')
         self.vid_model = self.vid_model.eval()
         
         # Load 3D pose regressor
-        default_cfg = bev_settings()
+        default_cfg = bev_settings([])  # do not parse the caller's sys.argv
         self.pose_model = BEV(default_cfg)
         self.smpl_parser = SMPLA_parser(default_cfg.smpl_path, default_cfg.smil_path)
 

@@ -10,7 +10,9 @@ from PIL import Image
 from io import BytesIO
 import sys
 import tqdm
-sys.path.append('/mnt/jaewoo4tb/textraj')
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repo root
+from kdtf_paths import TMP_DIR, PLLAVA_DIR
 import pandas as pd
 import csv
 from bev.model import BEV
@@ -21,9 +23,7 @@ from utils.utils import *
 from io import StringIO
 from transformers import CLIPProcessor, CLIPModel
 import copy
-from utils.pllava_utils import *
-from utils.pllava_eval_utils import conv_templates
-from decord import VideoReader, cpu
+import torch
 import skimage.segmentation as segmentation
 
 def Rx(theta):
@@ -143,7 +143,7 @@ class Socials:
 class Caption3DPoseEngine:
     def __init__(self, conv_mode, num_frames):
         self.HORIZONTAL_MARGIN = 100
-        self.CROP_IMG_DIR = "/mnt/jaewoo4tb/textraj/temp/crop_imgs"
+        self.CROP_IMG_DIR = os.path.join(TMP_DIR, 'crop_imgs')
         self.caption_count = 0
         self.agents = None
 

@@ -1,0 +1,14 @@
+# Install PyTorch 2.3.0 (CUDA 12.1) first, see README.
+torch_geometric==2.5.3
+pytorch-lightning==1.9.0
+transformers==4.26.1
+numpy==1.26.4
+scipy
+pandas
+tqdm
+matplotlib
+# stage-1 preprocessing only
+opencv-python
+scikit-image
+trimesh
+pyrender

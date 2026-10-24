@@ -8,7 +8,9 @@ import time
 from PIL import Image
 from io import BytesIO
 import sys
-sys.path.append('/mnt/jaewoo4tb/textraj')
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # repo root
+from kdtf_paths import TMP_DIR, PLLAVA_DIR
 from bev.model import BEV
 from bev.cfg import bev_settings
 from bev.post_parser import *
@@ -96,7 +98,7 @@ class Socials:
 class Caption3DPoseEngine:
     def __init__(self, type_cap, visualize):
         self.HORIZONTAL_MARGIN = 100
-        self.CROP_IMG_DIR = "/mnt/jaewoo4tb/textraj/temp/crop_imgs"
+        self.CROP_IMG_DIR = os.path.join(TMP_DIR, 'crop_imgs')
         
         # print(f"Loading VLM, type: {type_cap}")
         # if type_cap == 'vllm':
@@ -107,7 +109,7 @@ class Caption3DPoseEngine:
         #     self.caption_model = CaptionModel()
         
         print("Loading 3D pose regressor")
-        default_cfg = bev_settings()
+        default_cfg = bev_settings([])  # do not parse the caller's sys.argv
         self.pose_model = BEV(default_cfg)
         self.smpl_parser = SMPLA_parser(default_cfg.smpl_path, default_cfg.smil_path)
         # if visualize: self.renderer = Py3DR()

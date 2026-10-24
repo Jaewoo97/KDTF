@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
 import sys
-sys.path.append('/ssd4tb/jaewoo/t2p/ROMP/simple_romp')
-sys.path.append('/home/user/anaconda3/envs/textraj/lib/python3.8/site-packages/bev/')
 import numpy as np
 from romp.model import HigherResolutionNet, BasicBlock
 from bev.post_parser import CenterMap3D

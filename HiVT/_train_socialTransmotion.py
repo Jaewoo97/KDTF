@@ -13,7 +13,6 @@
 # limitations under the License.
 from argparse import ArgumentParser
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 import torch
 torch.multiprocessing.set_sharing_strategy('file_system')
 # torch.multiprocessing.set_start_method('spawn')

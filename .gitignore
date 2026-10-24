@@ -1,28 +1,22 @@
-HiVT/__pycache__
-HiVT/__viz_*
-HiVT/_logs*
-HiVT/.vscode
-HiVT/logs*
 **/__pycache__/
+*.pyc
+.vscode/
+
+# data, checkpoints and logs
+data/
+logs/
+temp/
+checkpoints/
+*.ckpt
+lightning_logs/
+HiVT/logs*
+HiVT/_logs*
+HiVT/__viz_*
+preprocessed_1st/
+preprocessed_2nd/
+
+# BEV / ROMP / SMPL model files (download separately, see README)
+romp/files/
+
+# external code
 LAVIS
-preprocessed_1st
-preprocessed_2nd
-*egovlm.py
-preprocessing_script/*nba.py
-preprocessing_script/*nfl.py
-preprocessing_script/*soccer.py
-preprocessing_script/preprocess_2nd_jrdb_v2_joint.py
-preprocessing_script/preprocess_2nd_jrdb_v2_viz.py
-preprocessing_script/preprocess_2nd.py
-preprocessing_script/preprocess_2nd_v3.py
-preprocessing_script/*.sh
-HiVT/models_original
-romp/files/
-HiVT/___models_copy
-HiVT/___scripts_copy
-# ignore all ROMP blobs
-romp/files/
-
-romp/files/
-
-romp/files/

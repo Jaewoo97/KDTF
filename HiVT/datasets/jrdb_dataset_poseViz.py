@@ -24,7 +24,7 @@ from torch_geometric.data import Data
 from torch_geometric.data import Dataset
 from tqdm import tqdm
 import sys
-sys.path.append('/mnt/jaewoo4tb/textraj/')
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))  # repo root
 from HiVT.utils_hivt import TemporalData
 class jrdbDataset_poseViz(Dataset):
 
